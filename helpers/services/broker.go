@@ -130,6 +130,7 @@ func (b ServiceBroker) GetApiInfoUrl() string {
 	brokerURL := helpers.AppUri(b.Name, "/cf_api_info_url", Config)
 	client := &http.Client{
 		Transport: &http.Transport{
+			Proxy: http.ProxyFromEnvironment,
 			TLSClientConfig: &tls.Config{
 				InsecureSkipVerify: Config.GetSkipSSLValidation(),
 			},

@@ -197,6 +197,7 @@ func newAuthClient() *authClient {
 	return &authClient{
 		c: &http.Client{
 			Transport: &http.Transport{
+				Proxy:           http.ProxyFromEnvironment,
 				TLSClientConfig: &tls.Config{InsecureSkipVerify: Config.GetSkipSSLValidation()},
 			},
 		},

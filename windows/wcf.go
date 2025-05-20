@@ -57,7 +57,7 @@ func wcfRequest(appName string) WCFResponse {
 	req, err := http.NewRequest("POST", uri, buf)
 	req.Header.Add("Content-Type", "text/xml")
 	req.Header.Add("SOAPAction", "http://tempuri.org/IHelloService/Echo")
-	client := &http.Client{Transport: &http.Transport{TLSClientConfig: &tls.Config{InsecureSkipVerify: true}}}
+	client := &http.Client{Transport: &http.Transport{Proxy: http.ProxyFromEnvironment, TLSClientConfig: &tls.Config{InsecureSkipVerify: true}}}
 	resp, err := client.Do(req)
 	Expect(err).To(BeNil())
 	defer resp.Body.Close()

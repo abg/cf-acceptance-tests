@@ -48,6 +48,7 @@ var _ = CommaDelimitedSecurityGroupsDescribe("Comma Delimited ASGs", func() {
 
 		client := &http.Client{
 			Transport: &http.Transport{
+				Proxy: http.ProxyFromEnvironment,
 				TLSClientConfig: &tls.Config{
 					InsecureSkipVerify: Config.GetSkipSSLValidation(),
 				},

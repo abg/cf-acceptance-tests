@@ -93,6 +93,7 @@ func handleRequest(destination string, resp http.ResponseWriter, req *http.Reque
 
 var httpClient = &http.Client{
 	Transport: &http.Transport{
+		Proxy:             http.ProxyFromEnvironment,
 		DisableKeepAlives: true,
 		Dial: (&net.Dialer{
 			Timeout:   10 * time.Second,

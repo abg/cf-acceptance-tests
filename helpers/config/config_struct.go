@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"net"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -549,10 +548,6 @@ func validateApiEndpoint(config *config) error {
 		host = u.Path
 	}
 
-	if _, err = net.LookupHost(host); err != nil {
-		return fmt.Errorf("* Invalid configuration for 'api' <%s>: %s", config.GetApiEndpoint(), err)
-	}
-
 	return nil
 }
 
@@ -571,10 +566,6 @@ func validateAppsDomain(config *config) error {
 	if host == "" {
 		// url.Parse misunderstood our convention and treated the hostname as a URL path
 		host = u.Path
-	}
-
-	if _, err = net.LookupHost(madeUpAppHostname); err != nil {
-		return fmt.Errorf("* Invalid configuration for 'apps_domain' <%s>: %s", config.GetAppsDomain(), err)
 	}
 
 	return nil
