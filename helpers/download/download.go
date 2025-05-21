@@ -16,6 +16,8 @@ func WithRedirect(url, path string, config config.CatsConfig) error {
 	oauthToken := v3_helpers.GetAuthToken()
 	downloadCurl := helpers.Curl(
 		config,
+		"--location",
+		"--max-redirs", strconv.Itoa(maxNumRedirects),
 		"-v", fmt.Sprintf("%s%s%s", config.Protocol(), config.GetApiEndpoint(), url),
 		"-H", fmt.Sprintf("Authorization: %s", oauthToken),
 		"-o", path,
